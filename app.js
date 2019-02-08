@@ -53,13 +53,23 @@ app.get('/addpost2', (req, res) => {
   });
 });
 
-//Select posts
+//Select all posts
 app.get('/getposts', (req, res) => {
   let sql = 'SELECT * FROM posts';
   let query = db.query(sql, (err, results) => {
     if (err) throw err;
     console.log(results);
     res.send('Post fetched');
+  });
+});
+
+app.get('/getpost/:id', (req,res) => {
+  //use `` instead of '' so we can use a variable
+  let sql = `SELECT * FROM posts WHERE id = ${req.params.id}`;
+  let query = db.query(sql, (err,result) => {
+    if (err) throw err;
+    console.log(result);
+    res.send('Single post fetched..');
   });
 });
 
