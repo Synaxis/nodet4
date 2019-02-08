@@ -38,7 +38,28 @@ app.get('/addpost1', (req, res) => {
   let query = db.query(sql, post, (err, result) => {
       if (err) throw err;
       console.log(result);
-      res.send('Posts 1 added...');
+      res.send('Post 1 added...');
+  });
+});
+
+// Insert post 2
+app.get('/addpost2', (req, res) => {
+  let post = {title:'Post two', body:'This is post number 2'};
+  let sql = 'INSERT INTO posts SET ?';
+  let query = db.query(sql, post, (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      res.send('Post 2 added...');
+  });
+});
+
+//Select posts
+app.get('/getposts', (req, res) => {
+  let sql = 'SELECT * FROM posts';
+  let query = db.query(sql, (err, results) => {
+    if (err) throw err;
+    console.log(results);
+    res.send('Post fetched');
   });
 });
 
